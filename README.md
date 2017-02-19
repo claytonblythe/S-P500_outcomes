@@ -12,7 +12,7 @@ Language: R (R-Studio)
 
 Here is the final product, showing the density of investing outcomes over a progressingly longer investing time horizon.
 # Outcome Distributions for Various Time Horizons:
-![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/moving_density.gif)
+![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/investments_full_data_testnewest.gif)
 
 # Investment Outcome Heatmaps:
 ![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/cashmultipliers_Spectral_20years.png)
