@@ -18,4 +18,4 @@ Here is the final product, showing the density of investing outcomes over a prog
 ![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/cashmultipliers_Spectral_20years.png)
 
 # Densities of Investment Outcomes:
-![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/20years.png)
+![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/40years.png)
