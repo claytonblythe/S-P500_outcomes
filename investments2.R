@@ -1,16 +1,10 @@
-#investments2--trying to simplify the process
+#investments2--trying to simplify the code
 rm(list=ls())
 abs_path <- '/users/claytonblythe/Desktop/Mega/Statistics_Machine_Learning/'
 setwd(abs_path)
-library(ggplot2)
-library(dplyr)
-library(animation)
-library(RColorBrewer)
-library(reshape2)
-library(ggthemes)
-library(gganimate)
-library(devtools)
-library(nnet)
+#libraries that will be used
+x <- c("ggplot2", "dplyr", "animation", "RColorBrewer", "reshape2", "ggthemes", "gganimate", "nnet")
+lapply(x, require, character.only=TRUE)
 
 #get the data in the appropriate format
 import <- read.csv('sp_data.csv')
@@ -22,26 +16,23 @@ data$appreciation_multiplier[1] = 1
 data$real_account_value[1] = data$Real.Price[1]
 data$real_cash_multiplier[1] = 1
 
+#calculate the consecutive values for the account, this could probably be sped up using sapply but this works quickly for now
 for (i in 2:nrow(data)){
   data$appreciation_multiplier[i] = data$Real.Price[i] / data$Real.Price[i-1]
   data$real_account_value[i] = (data$real_account_value[i-1] * data$appreciation_multiplier[i]) + (data$Real.Dividend[i-1]/data$Real.Price[i-1])*(data$real_account_value[i-1]/12) 
   data$real_cash_multiplier[i] = data$real_account_value[i] / data$real_account_value[1]
 }
 
-#create a dummy function 
+#create a dummy function for finding the relevant cash multipliers for various dates and time horizons 
 dummy <- function(x,y) data$real_account_value[x+y-1]/data$real_account_value[x]
-#this part takes about a minute or two to run, not sure if there is a faster way to go out and grab/generate the appropriate cash multipliers
+#this part takes about a minute or so to run, here we go through all 1746 months of observations, grabbing values up to  481 months (which is 40 years) ahead
 performance <- sapply(1:481, function(j) sapply(1:1746, function(i) dummy(i,j)))
-performance_40years <- performance[,1:481]
-row.names(performance_40years) <- data$Date
-colnames(performance_40years) <- formatC(round(seq(from=0, to=480)/12,2),2, format="f")
-performance <- rbind(performance,colMeans(performance, na.rm=TRUE))
+#each column of the matrix is a different time horizon, starting at 0 months going to 481 months
 performance <- data.frame(performance)
 names(performance) <- formatC(round(seq(from=0, to=480)/12,2),2, format="f")
-performance_40years <- as.data.frame(performance_40years)
-performance_40years$date <- as.Date(data$Date)
-glimpse(performance_40years$date)
-performance_melted <- na.omit(melt(performance_40years,id.vars = c("date"), preserve.na=FALSE, variable.name="time_horizon", value.name = "cash_multiplier"))
+performance$date <- as.Date(data$Date)
+#use the reshape package to "melt" the performance data into three columns for date, time horizon of investment, and cash multiplier
+performance_melted <- na.omit(melt(performance,id.vars = c("date"), preserve.na=FALSE, variable.name="time_horizon", value.name = "cash_multiplier"))
 performance_melted$time_horizon <- as.numeric(as.character(performance_melted$time_horizon))
 
 # 
@@ -64,13 +55,13 @@ saveGIF((
   }
 ), movie.name = "investments_final.gif", interval = 0.08, nmax = ifelse(interactive(), 30, 2), ani.width = 1066, ani.height = 600, clean=TRUE)
 
-##HEAT MAP-stable
+##HEAT MAP
 # m <- ggplot(data=performance_melted,aes(x=time_horizon, y=date))
 # m + scale_y_date(date_breaks = "4 year",  date_labels = "%Y", expand = c(0,0)) + scale_x_continuous(breaks = round(seq(min(performance_melted$time_horizon), max(performance_melted$time_horizon), by = 2),1), expand=c(0,0)) + scale_fill_distiller(palette = "Spectral", direction=-1, guide=guide_colorbar(title="Cash Multiplier")) + theme_classic() +xlab("Time Horizon")+ylab("Date") +geom_tile(aes(fill=cash_multiplier)) + ggtitle("S&P 500 Investment Outcomes by /u/etherealoptimist") 
 # ggsave("cashmultipliers_Spectral_10years_withname.pdf", plot=last_plot())
 
 # 
-# #overlapping density charts
+# #Overlapping Density Plots with ggplot2
 # relevant_years <- filter(performance_melted, time_horizon %% 10 == 0 & time_horizon > 0 & time_horizon <=40)
 # ggplot(relevant_years, aes(x = cash_multiplier, fill = as.factor(time_horizon))) +
 #   geom_density(position = "identity", alpha = 0.8) +
