@@ -11,11 +11,12 @@ Data includes from 1871 to 1976, as 40 year outcomes were not available since th
 Language: R (R-Studio)
 
 Here is the final product, showing the density of investing outcomes over a progressingly longer investing time horizon.
+# Densities of Investment Outcomes:
+![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/40years.png)
+
 # Outcome Distributions for Various Time Horizons:
 ![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/investments_final.gif)
 
 # Investment Outcome Heatmaps:
 ![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/cashmultipliers_Spectral_20years.png)
 
-# Densities of Investment Outcomes:
-![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/40years.png)
