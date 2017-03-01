@@ -1,12 +1,15 @@
 # S&P 500 Investment Outcomes
 
-A repository for investigating the historical distribution of investment outcomes since 1871
+This is a project I have begun  for investigating the historical distribution of investment outcomes since 1871.
 
 Hello, my name is Clayton Blythe and this is a program to investigate what are the investment outcomes that one can expect from the S&P500 based on historical data. Though past performance is not certain, it gives an interesting visualization and calculation of ballpark estimates (barring any serious unforseen event).
 
-Notes: Values are adjusted for inflation, assuming yearly reinvestment of that year's dividends. For every time horizon (1 month -> 480 months) I calculated the distribution of cash multipliers that one can expect. The cash multiplier is defined as what value you can expect a $1 initial investment to eventually grow to be. 
+I am interested in investigating the probability distribution, variance, and expected value that one can expect of investment in the general U.S. Stock Market over various time horizons.  
 
-Data includes from 1871 to 1976, as 40 year outcomes were not available since then. I am working on including more recent data for the shorter time horizons, as those should be available. 
+Notes: Values are adjusted for inflation, assuming yearly reinvestment of that year's dividends. For every time horizon (1 month -> 480 months) I calculated the distribution of cash multipliers that one can expect. The cash multiplier is defined as what value you can expect a $1 initial investment to eventually grow to be. This is useful, as it can serve as a simple multiplier for estimating returns for various purposes such as retirement savings.
+
+Data includes from 1871 to 2016, where 40 year outcomes are not availble before 1976. This can be seen with the trapezoidal heat map below. 
+I have calculated investment outcomes in the investments.R file, with plots made using ggplot for nice visualization. 
 
 Language: R (R-Studio)
 
