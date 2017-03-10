@@ -21,5 +21,10 @@ Here is the final product, showing the density of investing outcomes over a prog
 ![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/investments_final.gif)
 
 # Investment Outcome Heatmaps:
+
+# 20 year heatmap
 ![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/cashmultipliers_Spectral_20years.png)
+
+# 40 year heatmap
+![Alt Test](https://github.com/claytonblythe/S-P500_outcomes/blob/figures/cashmultipliers_Spectral_40years.png)
 
